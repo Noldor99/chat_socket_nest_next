@@ -23,7 +23,6 @@
     "axios": "^1.6.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "env-cmd": "^10.1.0",
     "framer-motion": "^11.0.3",
     "lucide-react": "^0.303.0",
     "moment": "^2.30.1",

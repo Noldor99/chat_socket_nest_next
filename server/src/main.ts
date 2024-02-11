@@ -4,17 +4,8 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config'
 import * as cookieParser from 'cookie-parser'
-import { CookieOptions } from 'express';
 
-function getCookieOptions(): CookieOptions {
-  return {
-    httpOnly: true,
-    signed: true,
-    sameSite: 'none',
-    secure: true,
-    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  };
-}
+
 
 async function start() {
   const PORT = process.env.PORT || 4000
@@ -24,8 +15,8 @@ async function start() {
 
 
   const configService = app.get(ConfigService)
-  const COOKIE_SECRET = configService.get('COOKIE_SECRET', getCookieOptions()) || 'default'
-  app.use(cookieParser(COOKIE_SECRET, { sameSite: 'none', secure: true }));
+  const COOKIE_SECRET = configService.get('COOKIE_SECRET') || 'default'
+  app.use(cookieParser(COOKIE_SECRET));
 
   app.enableCors({ credentials: true, origin: true });
   app.useGlobalPipes(new ValidationPipe());
@@ -42,8 +33,6 @@ async function start() {
 
     next();
   });
-
-
 
 
   const config = new DocumentBuilder()

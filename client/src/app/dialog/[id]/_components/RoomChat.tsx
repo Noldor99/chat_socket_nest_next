@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { useConnectToRoom } from "@/hooks/useRooms"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import MessegeForm from "./MessegeForm"
 import { IMessage } from "@/types/messages"
 import { io } from "socket.io-client"
@@ -33,6 +33,16 @@ const RoomChat = ({ id }: RoomChatProps) => {
   const [groupid, setGroupid] = useState<string | undefined>()
 
   const { user } = useUserStore()
+
+  const [lastMessageRef, setLastMessageRef] = useState<HTMLDivElement | null>(
+    null
+  )
+
+  useEffect(() => {
+    if (lastMessageRef) {
+      lastMessageRef.scrollIntoView({ behavior: "smooth" })
+    }
+  }, [messages])
 
   useEffect(() => {
     mutate({ idUserOrGroop: id })
@@ -71,7 +81,7 @@ const RoomChat = ({ id }: RoomChatProps) => {
     <div>
       <section className="flex-1">
         <div className="container mt-6">
-          <div className="flex flex-col paper-sharp mb-[40px] gap-4 max-w-[400px] m-auto">
+          <div className="flex flex-col sm:paper-sharp mb-[40px] gap-4 max-w-[400px] m-auto">
             <div className="paper-rounded">
               <Button variant="black" onClick={() => router.back()}>
                 Back
@@ -89,6 +99,7 @@ const RoomChat = ({ id }: RoomChatProps) => {
                       username={item?.currentUserName}
                     />
                   ))}
+                <div ref={setLastMessageRef}></div>
               </ScrollArea>
             </div>
             <MessegeForm groupid={groupid} socket={socket} />

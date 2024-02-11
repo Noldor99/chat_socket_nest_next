@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: #eeeeee;
+    --background: #e7f1fb;
     --foreground: #cdd1d5;
     --secondary: #e3e31b;
     --primary: #6a64e8;
@@ -14,7 +14,7 @@
     --destructive: #da0000;
   }
   body {
-    @apply bg-background font-normal text-black;
+    @apply font-normal text-black;
   }
 }
 

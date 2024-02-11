@@ -29,6 +29,9 @@ const RootLayout = async ({ children }: RootLayoutPropsT) => {
     <html lang="en">
       <body className={`flex min-h-screen flex-col ${spaceMono.className}`}>
         <Providers>
+          <div className="fixed left-0 right-0 top-0 z-[-1]">
+            <div className="h-[80vh] bg-background blur-[90px] filter"></div>
+          </div>
           <LayoutWrapper>{children}</LayoutWrapper>
         </Providers>
       </body>
