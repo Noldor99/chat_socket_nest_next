@@ -24,13 +24,13 @@ export const SheetHeader = ({ nav }: SheetHeaderPropsType) => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button className="p-2 xl:hidden" variant="outline">
+        <Button className="p-2 xl:hidden">
           <IconMenuDeep size={"26px"} />
         </Button>
       </SheetTrigger>
       <SheetContent className="flex !w-full !max-w-full flex-col items-end justify-start bg-white">
         <SheetClose asChild>
-          <Button className=" p-2 xl:hidden" variant="outline">
+          <Button className=" p-2 xl:hidden">
             <IconX />
           </Button>
         </SheetClose>

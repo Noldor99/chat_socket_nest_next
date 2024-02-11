@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import React, { useEffect } from "react"
 
-const page = () => {
+const Page = () => {
   const router = useRouter()
   useEffect(() => {
     router.push("/home")
@@ -12,4 +12,4 @@ const page = () => {
   return <></>
 }
 
-export default page
+export default Page

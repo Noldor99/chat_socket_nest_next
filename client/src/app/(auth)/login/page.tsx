@@ -62,7 +62,7 @@ const LoginForm = () => {
             href="/registration"
             className="text-blue-500 underline mt-4 block"
           >
-            Don't have an account? Register here.
+            Dont have an account? Register here.
           </Link>
         </div>
       </section>
