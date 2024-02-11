@@ -10,8 +10,9 @@ import { useRouter } from "next/navigation"
 import SmallCardMessege from "./SmallCardMessege"
 import { useUserStore } from "@/store"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { sokerUrl } from "@/lib/axios"
 
-const socket = io("http://localhost:7777", {
+const socket = io(sokerUrl, {
   transports: ["websocket", "polling", "flashsocket"],
 })
 
