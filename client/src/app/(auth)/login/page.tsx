@@ -43,7 +43,7 @@ const LoginForm = () => {
       <section className="flex flex-1 items-center justify-center p-3">
         <div className="mx-auto w-full max-w-sm">
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormInput name="username" placeholder="Log in" />
+            <FormInput name="username" placeholder="Username" />
             <FormInput name="password" placeholder="Password" type="password" />
             <Button
               className="!mt-6 w-full"

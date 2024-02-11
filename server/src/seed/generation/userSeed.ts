@@ -15,21 +15,18 @@ export class UserSeed implements SeederInterface {
     const usersSeedData: CreateUserDto[] = [
       {
         username: 'admin-v3v',
-        surname: 'admin-surname',
         email: 'new_user@example.com',
         password: 'Jw9gP2xqL',
         color: 'black'
       },
       {
         username: 'jane_doe',
-        surname: 'doe-surname',
         email: 'new_user2@example.com',
         password: 'strongPassword',
         color: 'black'
       },
       {
         username: 'light',
-        surname: 'light-surname',
         email: 'new_user3@example.com',
         password: 'secure',
         color: 'black'
