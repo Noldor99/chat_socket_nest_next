@@ -11,14 +11,6 @@ export class CreateUserDto {
   readonly username: string;
 
   @ApiProperty({
-    example: 'volt',
-    description: 'The surname of the user',
-  })
-  @IsString({ message: 'Must be a string' })
-  @IsNotEmpty({ message: 'Must not be empty' })
-  readonly surname: string;
-
-  @ApiProperty({
     example: 'user@example.com',
     description: 'The email of the user',
   })
