@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { CookieOptions } from 'express'
 import * as bcrypt from 'bcryptjs'
 import { UserService } from 'src/user/user.service'
 import { LoginUserDto } from './dtos/login-user.dto'
@@ -13,9 +12,6 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) { }
-
-
-  private readonly isDevelopment = process.env.NODE_ENV === 'development'
 
   private readonly accessTokenSecret: string =
     process.env.ACCESS_TOKEN_SECRET || 'your_access_token_secret_value_web3'
@@ -48,15 +44,7 @@ export class AuthService {
     return userWithoutPassword
   }
 
-  getCookieOptions(): CookieOptions {
-    return {
-      httpOnly: true,
-      signed: true,
-      sameSite: 'none',
-      secure: this.isDevelopment ? false : true,
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-    }
-  }
+
 
   async login(loginDto: LoginUserDto) {
     try {

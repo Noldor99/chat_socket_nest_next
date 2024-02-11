@@ -21,7 +21,7 @@ export class SeedService {
   ) {
     this.seeders = isProdaction
       ? [
-        // this.resetTotalDataSeed,
+        this.resetTotalDataSeed,
         this.roleSeed,
         this.userSeed,
 

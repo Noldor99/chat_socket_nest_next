@@ -4,6 +4,17 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config'
 import * as cookieParser from 'cookie-parser'
+import { CookieOptions } from 'express';
+
+function getCookieOptions(): CookieOptions {
+  return {
+    httpOnly: true,
+    signed: true,
+    sameSite: 'none',
+    secure: true,
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  };
+}
 
 async function start() {
   const PORT = process.env.PORT || 4000
@@ -13,18 +24,26 @@ async function start() {
 
 
   const configService = app.get(ConfigService)
-  const COOKIE_SECRET = configService.get('COOKIE_SECRET') || 'default'
+  const COOKIE_SECRET = configService.get('COOKIE_SECRET', getCookieOptions()) || 'default'
   app.use(cookieParser(COOKIE_SECRET, { sameSite: 'none', secure: true }));
 
   app.enableCors({ credentials: true, origin: true });
   app.useGlobalPipes(new ValidationPipe());
 
   app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://chat-client-86ng.onrender.com');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    const allowedOrigins = ['https://chat-client-86ng.onrender.com', 'http://localhost:7777'];
+
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.header('Access-Control-Allow-Origin', origin);
+      res.header('Access-Control-Allow-Credentials', 'true');
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    }
+
     next();
   });
+
+
 
 
   const config = new DocumentBuilder()

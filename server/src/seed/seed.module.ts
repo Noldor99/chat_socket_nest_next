@@ -10,11 +10,12 @@ import { AuthModule } from 'src/auth/auth.module'
 import { User } from 'src/entity/user.entity'
 import { DatabaseModule } from 'src/database/database.module'
 import { ResetTotalDataSeed } from './generation/resetTotalDataSeed'
+import { MessagesEntity } from 'src/entity/messages.entity'
 
 @Module({
   imports: [
     DatabaseModule,
-    TypeOrmModule.forFeature([Role, User]),
+    TypeOrmModule.forFeature([Role, User, MessagesEntity]),
     UserModule,
     AuthModule,
     RolesModule,
