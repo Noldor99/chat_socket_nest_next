@@ -14,10 +14,18 @@ async function start() {
 
   const configService = app.get(ConfigService)
   const COOKIE_SECRET = configService.get('COOKIE_SECRET') || 'default'
-  app.use(cookieParser(COOKIE_SECRET))
+  app.use(cookieParser(COOKIE_SECRET, { sameSite: 'none', secure: true }));
 
   app.enableCors({ credentials: true, origin: true });
   app.useGlobalPipes(new ValidationPipe());
+
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://chat-client-86ng.onrender.com');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+
 
   const config = new DocumentBuilder()
     .setTitle('Cloud storage')
